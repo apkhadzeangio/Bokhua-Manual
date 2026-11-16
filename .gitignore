@@ -1,0 +1,41 @@
+# Python byte-compiled / caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS / Editor metadata
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Build artifacts & local guideline PDFs
+build/*.pdf
+build/*.epub
+build/*.docx
+build/*.html
+build/*.aux
+build/*.log
+build/*.out
+build/*.toc
+00_reference/guidelines/*.pdf
+
+# VM home-directory / upload staging files (when repo sits in $HOME)
+/.bash*
+/.profile
+/.gitconfig
+/.gemini
+/.cache
+/.local
+/.config
+/upload/
+/*.docx
