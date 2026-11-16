@@ -360,13 +360,23 @@ def validate_chapter_text(
             f"[INFO] ნაპოვნია გაიდლაინის {report.guideline_count} მტკიცებულებითი კოდი."
         )
 
+    is_front_matter = any(
+        "Front Matter" in ln or "წინასწარი სარედაქციო ბლოკი" in ln
+        for ln in lines[:25]
+    )
+
     if part in ("full", "2"):
-        has_closing = any(marker in clean_body for marker in CLOSING_MARKERS)
-        if not has_closing:
-            report.errors.append(
-                "[ERROR] ტექსტში არ იძებნება დასკვნითი საფირმო ბლოკი "
-                "('ბოხუას კლინიკური მარგალიტები' ან 'გადარჩენის კლინიკური წესები')."
+        if is_front_matter:
+            report.info.append(
+                "[INFO] Front Matter რეჟიმი: დასკვნითი კლინიკური მარგალიტების ბლოკი არ მოითხოვება."
             )
+        else:
+            has_closing = any(marker in clean_body for marker in CLOSING_MARKERS)
+            if not has_closing:
+                report.errors.append(
+                    "[ERROR] ტექსტში არ იძებნება დასკვნითი საფირმო ბლოკი "
+                    "('ბოხუას კლინიკური მარგალიტები' ან 'გადარჩენის კლინიკური წესები')."
+                )
 
     return report
 
